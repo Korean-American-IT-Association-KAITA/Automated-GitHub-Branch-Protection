@@ -85,7 +85,6 @@ STEP 4: Setup a GitHub token under your new organization.
 
 Follow [this guide on how to create a personal token](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token).
 
-![Personal Token Setup](./images/personal-token.jpg)
 
 Make sure you select everything under **repo**, everything under **admin:repo_hook**, and **delete_repo**. Make sure to copy and save it in a safe location. This token is referenced in [required-environment.env](./required-environment.env), and you need it for your app to be authenticated with GitHub.
 
