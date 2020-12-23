@@ -154,41 +154,6 @@ oc login ${ocp cluster}
 oc new-project ${new project}
 ```
 
-3. Create a new 
-
-Shell (Mac, Linux):
-
-```sh
-curl -fsSL https://deno.land/x/install/install.sh | sh
-```
-
-PowerShell (Windows):
-
-```powershell
-iwr https://deno.land/x/install/install.ps1 -useb | iex
-```
-
-[Homebrew](https://formulae.brew.sh/formula/deno) (Mac):
-
-```sh
-brew install deno
-```
-
-[Chocolatey](https://chocolatey.org/packages/deno) (Windows):
-
-```powershell
-choco install deno
-```
-
-Build and install from source using [Cargo](https://crates.io/crates/deno):
-
-```sh
-cargo install deno
-```
-
-See
-[deno_install](https://github.com/denoland/deno_install/blob/master/README.md)
-and [releases](https://github.com/denoland/deno/releases) for other options.
 
 ### Deploying and Running on Local Kubernetes Service
 
