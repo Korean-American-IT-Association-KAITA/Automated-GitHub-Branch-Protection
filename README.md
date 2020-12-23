@@ -85,13 +85,37 @@ STEP 4: Setup a GitHub token under your new organization.
 
 Follow [this guide on how to create a personal token](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token).
 
+![Personal Token Setup](./images/personal-token.jpg)
 
 Make sure you select everything under **repo**, everything under **admin:repo_hook**, and **delete_repo**. Make sure to copy and save it in a safe location. This token is referenced in [required-environment.env](./required-environment.env), and you need it for your app to be authenticated with GitHub.
 
 
-STEP 5: Visit the [Automated GitHub Branch Protection GitHub page](https://github.com/Korean-American-IT-Association-KAITA/Automated-GitHub-Branch-Protection) and fork the repo. See the screenshot below.
+STEP 5: Visit the [Automated GitHub Branch Protection GitHub page](https://github.com/Korean-American-IT-Association-KAITA/Automated-GitHub-Branch-Protection) and fork the repo. 
 
 STEP 6: Setup a Webhook for your organizaton
+
+To add a Webhook, this needs to be added under your new organization. Note that this step needs to be changed later since you don't have an environment changed later. Still, let's proceed with the configuration.
+
+Under your newly created organization, click **Settings**.
+
+![Settings for Organization](./images/webhook/1_Settings.jpg)
+
+Select **Webhooks** in your next page.
+
+![Select Webhooks](./images/webhook/2_Webhooks.jpg)
+
+In next page, click **Add webhook** button.
+
+![Add Webhook](./images/webhook/3_AddWebhook.jpg)
+
+You will see several fields to configure.
+
+* First, for **Payload URL**, this is only the field to change later since you don't have an environment yet. This will be in a form of **URL/webhooks**.
+* Content type: This will be always send as **application/json**. If you don't change this, you will have a JSON parse error.
+* Secret: This is GitHub Webhook secret seen in [required-environment.env](./required-environment.env) and referenced in [app/server.js](./app/server.js). Make sure save the value somewhere
+* Make sure you select **Send me everything** since we need Webhook to delete **repository** event.
+
+![Configure Webhook](./images/webhook/4_WebhookSetting.jpg)
 
 Now, follow the respective guide below for your own environment.
 
@@ -104,15 +128,19 @@ The easiest way to test the application is to run the application locally.
 
 STEP 1: Clone the repo
 
+Clone the repo that you forked. Make sure you copy the SSH link.
+
 ```sh
-git clone git@github.com:Korean-American-IT-Association-KAITA/Automated-GitHub-Branch-Protection.git
+git clone <SSH URL to the REPO THAT YOU FORKED>
 ```
 
 STEP 2: CD into the directory & run the **npm install** command
 
+CD into the directory and run the **npm install** command.
+
 ```sh
 # cd into the app directory
-cd xxx/app
+cd Automated-GitHub-Branch-Protection/app
 # Install NPM packages
 npm install
 ```
@@ -121,21 +149,38 @@ Running the command above will install the NPM packages as specified in the **pa
 
 STEP 3: Fill in and replace the required environment variables
 
+Please reference [**required-environment.env**](./required-environment.env) and fill out the values there. Export these values according to your OS environment. Reference **PreRequisites** section for more information. Once you set these environments, you should see by typing **echo** command. For example, 
+
+```sh
+$ echo $ORGANIZATION
+```
+
 STEP 4: Launch the NodeJS instance 
+
+NodeJS is setup to run in **port 3000**. To run, type the following command.
 
 ```sh
 npm start
 ```
+
+This will open port 3000 and run the application as defined in **package.json**.
 
 STEP 5: Launch the [ngGrok](https://ngrok.com/) instance
 
 ```sh
 ngrok http 3000
 ```
+Copy the URL as you need this later.
 
 STEP 6: Setup the Webhook path
 
+Go back to the Webhook setting and replace the URL with the following.
+
+**NGROK URL/webhooks**
+
 STEP 7: Verify with creating a new repo
+
+Create a new repo now and verify that the issue is created with your name. Also, notice that the default main branch is protected.
 
 
 ### Deploying and Running on Red Hat Openshift
@@ -153,27 +198,27 @@ oc login ${ocp cluster}
 ```sh
 oc new-project ${new project}
 ```
-
+> TO DO
 
 ### Deploying and Running on Local Kubernetes Service
 
-Coming Soon!
+> Coming Soon!
 
 ### Deploying and Running on Amazon Kubernetes Service
 
-Coming Soon!
+> Coming Soon!
 
 ### Deploying and Running on Digital Ocean Kubernetes Service
 
-Coming Soon!
+> Coming Soon!
 
 ### Deploying and Running on Microsoft Azure Kubernetes Service
 
-Coming Soon!
+> Coming Soon!
 
 ### Deploying and Running on Google Cloud Platform Kubernetes Service
 
-Coming Soon!
+> Coming Soon!
 
 ### Deploying and Running on Heroku Service
 
@@ -207,4 +252,5 @@ To contribute, please read our
 * [GitHub Oktokit REST API Documentation: Create an Issue](https://octokit.github.io/rest.js/v18#issues-create)
 
 * [GitHub Issue - updateBranchProtection requires luke-cage preview #1368](https://github.com/octokit/rest.js/issues/1368)
+
 
