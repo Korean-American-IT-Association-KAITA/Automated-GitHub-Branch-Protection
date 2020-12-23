@@ -1,0 +1,13 @@
+{
+  "name": "automated-protection-github-branch",
+  "version": "1.0.0",
+  "description": "A simple NodeJS solution that automates the protection of a new GitHub repository by exploring powerful GitHub APIs, webhook, and a simple NodeJS webservice",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@octokit/webhooks": "7.21.0",
+    "@octokit/rest": "18.0.12"
+  }
+}
