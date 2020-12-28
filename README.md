@@ -199,21 +199,7 @@ oc login ${ocp cluster}
 oc new-project ${new project}
 ```
 
-3. Create an Openshift Secret to authenticate with Github
-
-Add the SSH public key to GitHub. Next, run the following command to create an Openshift secret based on GitHub's private key
-
-```sh
-oc create secret generic sec-github --from-file=ssh-privatekey=<location to SSH private key
-```
-
-This will be encoded to Base64 by default. You can verify the secret with the following command.
-
-```sh
-oc get secret
-```
-
-4. Create an Openshift Secret containing the token and GitHub webhook secret
+3. Create an Openshift Secret containing the token and GitHub webhook secret
 
 Look at the template file named **deployment/openshift/required-secrets.env** and fill out the appropriate values.
 
@@ -227,7 +213,7 @@ You can verify with the following command.
 oc get secret
 ```
 
-5. Create an Openshift Configmap containing the necessary environment values for our NodeJS application
+4. Create an Openshift Configmap containing the necessary environment values for our NodeJS application
 
 Look at the template file named **deployment/openshift/required-configmaps.env** and fill out the appropriate values.
 
@@ -241,7 +227,7 @@ You can verify with the following command.
 oc get cm
 ```
 
-4. Deploy the application using Source-to-Image (S2i)
+5. Create an Image stream to get the image from NodeJS
 
 Openshift provides the Source-to-Image that deploys the application easily by combining the source code and base container image. We will run the following command that pulls the Javascript based source codes from our GitHub and combines the NodeJS image.
 
@@ -249,7 +235,70 @@ Openshift provides the Source-to-Image that deploys the application easily by co
 oc new-app nodejs~SSH URL to the REPO THAT YOU FORKED
 ```
 
-5. 
+However, there are also sample Openshift Resources files that can be founder under **deployment/openshift**. Red Hat Openshift provides a default way to securely authenticate with Openshift Registry. There is a sample Image Stream (IS) file provided in **deployment/openshift/is-automated-github-branch-protection.yaml**
+
+Run the following command to deploy the IS.
+
+```sh
+oc apply -f is-automated-github-branch-protection.yaml
+```
+
+6. Create a BuildConfig (BC) with BuildConfig file.
+
+BuildConfig (BC) is an Openshift Resource that provides the build, or Continuous Integration part, of the build process, combining GitHub files with NodeJS image in our case.
+
+Run the following command to deploy the BuildConfig.
+
+```sh
+oc apply -f bc-automated-github-branch-protection.yaml
+```
+
+You can then trigger the BuildConfig with the following commands.
+
+```sh
+# See the build config
+oc get bc
+
+# Run the build
+oc start-build <build config above>
+```
+
+7. Deploy the Build with Deployment Config (DC)
+
+Deployment (DC) is the Continuous Deployment (DC) part of the process. 
+
+Run the following command to deploy the DeploymentConfig (DC):
+
+```sh
+oc apply -f dc-automated-github-branch-protection.yaml
+```
+
+8. Install the Service
+
+Service is an Openshift way to connect between different Pod's IP network.
+
+
+Run the following command to deploy the Service. This will bind to the port 3000.
+
+```sh
+oc apply -f svc-automated-github-branch-protection.yaml
+```
+
+Then, run the following command to verify that the Service is available.
+
+```sh
+oc get svc
+```
+
+9. Expose the Route
+
+Lastly, expose the Route through the Openshift Service. By doing this way, you are exposing the Route to the world.
+
+```sh
+oc expose svc <name of svc>
+```
+
+You can then visit the Route and add to Github Webhook wit **ROUTE URL/webhook** format.
 
 ### Deploying and Running on Local Kubernetes Service
 

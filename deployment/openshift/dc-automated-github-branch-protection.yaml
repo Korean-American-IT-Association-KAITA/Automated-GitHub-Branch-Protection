@@ -93,11 +93,11 @@ spec:
             configMapKeyRef:
               key: AUTHOR_EMAIL
               name: values-git
-        image: image-registry.openshift-image-registry.svc:5000/protect-branch/automated-github-branch-protection@sha256:755568771a7b7fc2b44612ba12136c71e42cc8218401c06df0f56924cf083c9a
+        image: protect-branch/automated-github-branch-protection:latest
         imagePullPolicy: Always
         name: automated-github-branch-protection
         ports:
-        - containerPort: 8080
+        - containerPort: 3000
           protocol: TCP
         resources: {}
         terminationMessagePath: /dev/termination-log

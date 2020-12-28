@@ -1,0 +1,38 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  labels:
+    app: automated-github-branch-protection
+    app.kubernetes.io/component: automated-github-branch-protection
+    app.kubernetes.io/instance: automated-github-branch-protection
+  name: automated-github-branch-protection
+spec:
+  failedBuildsHistoryLimit: 5
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: automated-github-branch-protection:latest
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    contextDir: app
+    git:
+      uri: https://github.com/Korean-American-IT-Association-KAITA/Automated-GitHub-Branch-Protection.git
+    type: Git
+  strategy:
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: nodejs:12
+        namespace: openshift
+    type: Source
+  successfulBuildsHistoryLimit: 5
+  triggers:
+    type: Generic
+  - type: ConfigChange
+  - imageChange:
+    type: ImageChange

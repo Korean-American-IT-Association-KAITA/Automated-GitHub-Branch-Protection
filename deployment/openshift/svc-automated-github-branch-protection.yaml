@@ -1,5 +1,5 @@
-apiVersion: image.openshift.io/v1
-kind: ImageStream
+apiVersion: v1
+kind: Service
 metadata:
   annotations:
     openshift.io/generated-by: OpenShiftNewApp
@@ -9,5 +9,13 @@ metadata:
     app.kubernetes.io/instance: automated-github-branch-protection
   name: automated-github-branch-protection
 spec:
-  lookupPolicy:
-    local: false
+  clusterIP: 172.30.236.40
+  ports:
+  - name: 3000-tcp
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    deploymentconfig: automated-github-branch-protection
+  sessionAffinity: None
+  type: ClusterIP
