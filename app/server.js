@@ -78,7 +78,7 @@ webhooks.on("repository", ({ id, name, payload }) => {
       octokit.repos.updateBranchProtection({
           owner: organization,
           repo: nameRepo,
-          branch: process.env.PROTECTING_BRANCH ? process.env.PROTECTING_BRANCH_BRANCH: "master",
+          branch: process.env.PROTECTING_BRANCH ? process.env.PROTECTING_BRANCH: "master",
           required_status_checks: {
             strict: true,
             contexts: [
