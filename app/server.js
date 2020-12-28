@@ -57,7 +57,7 @@ webhooks.on("repository", ({ id, name, payload }) => {
       octokit.repos.createOrUpdateFileContents({
         owner: organization,
         repo: nameRepo,
-        branch: process.env.PROTECTING_BRANCH ? process.env.PROTECTING_BRANCHPROTECTING_BRANCH: "master",
+        branch: process.env.PROTECTING_BRANCH ? process.env.PROTECTING_BRANCH: "master",
         path: "README.md",
         message: "Created README.md",
         content: process.env.CONTENT_FILE ? process.env.CONTENT_FILE : "R2V0IFN0YXJ0ZWQ=",
@@ -78,7 +78,7 @@ webhooks.on("repository", ({ id, name, payload }) => {
       octokit.repos.updateBranchProtection({
           owner: organization,
           repo: nameRepo,
-          branch: "master",
+          branch: process.env.PROTECTING_BRANCH ? process.env.PROTECTING_BRANCH_BRANCH: "master",
           required_status_checks: {
             strict: true,
             contexts: [

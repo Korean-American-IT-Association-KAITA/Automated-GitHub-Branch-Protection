@@ -198,7 +198,46 @@ oc login ${ocp cluster}
 ```sh
 oc new-project ${new project}
 ```
-> TO DO
+
+3. Create an Openshift Secret to authenticate with Github
+
+Add the SSH public key to GitHub. Next, run the following command to create an Openshift secret based on GitHub's private key
+
+```sh
+oc create secret generic sec-github --from-file=ssh-privatekey=<location to SSH private key
+```
+
+This will be encoded to Base64 by default. You can verify the secret with the following command.
+
+```sh
+oc get secret
+```
+
+4. Create an Openshift Secret containing the token and GitHub webhook secret
+
+Look at the template file named **deployment/openshift/required-secrets.env** and fill out the appropriate values.
+
+```sh
+oc create secret generic sec-openshift --from-env-file=<Environment file containing the GitHub token and Github Webhook secret>
+```
+
+You can verify with the following command.
+
+```sh
+oc get secret
+```
+
+5. 
+
+4. Deploy the application using Source-to-Image (S2i)
+
+Openshift provides the Source-to-Image that deploys the application easily by combining the source code and base container image. We will run the following command that pulls the Javascript based source codes from our GitHub and combines the NodeJS image.
+
+```sh
+oc new-app nodejs~SSH URL to the REPO THAT YOU FORKED
+```
+
+5. 
 
 ### Deploying and Running on Local Kubernetes Service
 
