@@ -44,8 +44,8 @@ Due to the security concerns and reusability, the environment variables will be 
 | USER_AGENT | Defines the name of the application. [See User Agent](https://docs.github.com/en/free-pro-team@latest/rest/overview/resources-in-the-rest-api#user-agent-required) | No but recommended | "myApp v.1.2.3" |
 | TIME_ZONE | Some requests that create new data, such as creating a new commit, allow you to provide time zone information when specifying or generating timestamps. Default is set to [See Time Zone](https://docs.github.com/en/free-pro-team@latest/rest/overview/resources-in-the-rest-api#timezones) | No but recommended | "America/Chicago" |
 | PROTECTING_BRANCH | Branch to protect when a new repo is created | No | master |
-| COMMITER_NAME | Name of a commiter | No | "Anonymous" |
-| COMMITER_EMAIL | Email of a commiter | No | "Anonymous" |
+| COMMITTER_NAME | Name of a commiter | No | "Anonymous" |
+| COMMITTER_EMAIL | Email of a commiter | No | "Anonymous" |
 | AUTHOR_NAME | Name of an author | No |  "Anonymous" |
 | AUTHOR_EMAIL | Email for an author | No | "Anonymous" |
 
@@ -227,7 +227,19 @@ You can verify with the following command.
 oc get secret
 ```
 
-5. 
+5. Create an Openshift Configmap containing the necessary environment values for our NodeJS application
+
+Look at the template file named **deployment/openshift/required-configmaps.env** and fill out the appropriate values.
+
+```
+oc create configmap values-git --from-env-file=<Environment file containing the necessary environment values for our NodeJS app>
+```
+
+You can verify with the following command.
+
+```sh
+oc get cm
+```
 
 4. Deploy the application using Source-to-Image (S2i)
 

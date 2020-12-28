@@ -62,8 +62,8 @@ webhooks.on("repository", ({ id, name, payload }) => {
         message: "Created README.md",
         content: process.env.CONTENT_FILE ? process.env.CONTENT_FILE : "R2V0IFN0YXJ0ZWQ=",
         committer: {
-          name: process.env.COMMITER_NAME ? process.env.COMMITER_NAME: "Anoynmous",
-          email: process.env.COMMITER_EMAIL ? process.env.COMMITER_EMAIL: "Anoynmous",
+          name: process.env.COMMITTER_NAME ? process.env.COMMITTER_NAME: "Anoynmous",
+          email: process.env.COMMITTER_EMAIL ? process.env.COMMITTER_EMAIL: "Anoynmous",
         },
         author: {
           name: process.env.AUTHOR_NAME ? process.env.AUTHOR_NAME: "Anoynmous",
