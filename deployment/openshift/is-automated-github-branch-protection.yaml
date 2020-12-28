@@ -1,0 +1,44 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: "2020-12-28T05:50:23Z"
+  generation: 1
+  labels:
+    app: automated-github-branch-protection
+    app.kubernetes.io/component: automated-github-branch-protection
+    app.kubernetes.io/instance: automated-github-branch-protection
+  name: automated-github-branch-protection
+  namespace: protect-branch
+  resourceVersion: "237094"
+  selfLink: /apis/image.openshift.io/v1/namespaces/protect-branch/imagestreams/automated-github-branch-protection
+  uid: 957849da-9cf6-42b4-a71f-9006e2004ee6
+spec:
+  lookupPolicy:
+    local: false
+status:
+  dockerImageRepository: image-registry.openshift-image-registry.svc:5000/protect-branch/automated-github-branch-protection
+  tags:
+  - items:
+    - created: "2020-12-28T07:12:37Z"
+      dockerImageReference: image-registry.openshift-image-registry.svc:5000/protect-branch/automated-github-branch-protection@sha256:755568771a7b7fc2b44612ba12136c71e42cc8218401c06df0f56924cf083c9a
+      generation: 1
+      image: sha256:755568771a7b7fc2b44612ba12136c71e42cc8218401c06df0f56924cf083c9a
+    - created: "2020-12-28T06:50:57Z"
+      dockerImageReference: image-registry.openshift-image-registry.svc:5000/protect-branch/automated-github-branch-protection@sha256:a0e73e6188e6c6f5ef28a430dde4943d9e6228e0e5bec5c62ad308533e37a95c
+      generation: 1
+      image: sha256:a0e73e6188e6c6f5ef28a430dde4943d9e6228e0e5bec5c62ad308533e37a95c
+    - created: "2020-12-28T06:44:34Z"
+      dockerImageReference: image-registry.openshift-image-registry.svc:5000/protect-branch/automated-github-branch-protection@sha256:3801241fffe99488558b1da00e899054442084f9f782225b9d7dd08af02ebcdf
+      generation: 1
+      image: sha256:3801241fffe99488558b1da00e899054442084f9f782225b9d7dd08af02ebcdf
+    - created: "2020-12-28T06:41:05Z"
+      dockerImageReference: image-registry.openshift-image-registry.svc:5000/protect-branch/automated-github-branch-protection@sha256:056bf3e64ed1c44014636052c1212393d213a6160902fd0b0e92ac709a1f2eb1
+      generation: 1
+      image: sha256:056bf3e64ed1c44014636052c1212393d213a6160902fd0b0e92ac709a1f2eb1
+    - created: "2020-12-28T05:57:43Z"
+      dockerImageReference: image-registry.openshift-image-registry.svc:5000/protect-branch/automated-github-branch-protection@sha256:ec299b6a455c0d9a98ba5c3dbe8b2e43011d415c4594e631d0882b2239bd05f9
+      generation: 1
+      image: sha256:ec299b6a455c0d9a98ba5c3dbe8b2e43011d415c4594e631d0882b2239bd05f9
+    tag: latest

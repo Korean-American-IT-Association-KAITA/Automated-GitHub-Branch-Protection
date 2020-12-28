@@ -73,15 +73,15 @@ spec:
             configMapKeyRef:
               key: PROTECTING_BRANCH
               name: values-git
-        - name: COMMITER_NAME
+        - name: COMMITTER_NAME
           valueFrom:
             configMapKeyRef:
-              key: COMMITER_NAME
+              key: COMMITTER_NAME
               name: values-git
-        - name: COMMITER_EMAIL
+        - name: COMMITTER_EMAIL
           valueFrom:
             configMapKeyRef:
-              key: COMMITER_EMAIL
+              key: COMMITTER_EMAIL
               name: values-git
         - name: AUTHOR_NAME
           valueFrom:
@@ -93,7 +93,7 @@ spec:
             configMapKeyRef:
               key: AUTHOR_EMAIL
               name: values-git
-        image: image-registry.openshift-image-registry.svc:5000/protect-branch/automated-github-branch-protection@sha256:a0e73e6188e6c6f5ef28a430dde4943d9e6228e0e5bec5c62ad308533e37a95c
+        image: image-registry.openshift-image-registry.svc:5000/protect-branch/automated-github-branch-protection@sha256:755568771a7b7fc2b44612ba12136c71e42cc8218401c06df0f56924cf083c9a
         imagePullPolicy: Always
         name: automated-github-branch-protection
         ports:
